@@ -1,0 +1,26 @@
+import React, { useState } from 'react';
+
+function TodoForm({onAddTodo}) {
+    const[workingTodoTitle, setWorkingTodoTitle] = useState("")
+
+    function handleAddTodo(event){
+            event.preventDefault()
+            if (workingTodoTitle === "") {
+                return
+            }
+            onAddTodo(workingTodoTitle)
+            setWorkingTodoTitle("");
+    }
+
+    return(
+        <>
+            <form onSubmit={handleAddTodo}>
+                <label htmlFor="todoTitle">Todo</label>
+                <input id="todoTitle" name="title" value={workingTodoTitle} onChange={(event) => setWorkingTodoTitle(event.target.value)}></input>
+                <button type="submit" disabled={workingTodoTitle === ""}>Add Todo</button>
+            </form>
+        </>
+    )
+}
+
+export default TodoForm
